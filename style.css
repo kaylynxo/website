@@ -13,7 +13,6 @@ body {
     color: #7A7C80;
 }
 
-/* Updated <h1> to share the styles of <h2> */
 h1, h2, .white {
     color: #fff;
 }
@@ -45,7 +44,6 @@ a {
     margin: 0;
 }
 
-/* Adjusted for the new <h1> tag */
 .section-1 h1 {
     font-size: 1.7rem;
     margin-bottom: 10px;
@@ -76,7 +74,7 @@ a {
 }
 
 .section-2 a {
-    display: inline-block; /* Changed from block to allow transform to work properly */
+    display: inline-block;
     padding: 5px;
     font-size: 1.2rem;
     padding-left: 0;
@@ -86,11 +84,6 @@ a {
 }
 
 /* animations / utilities */
-
-/* SEO/Performance fix: 
-   Changing font-size on hover causes Cumulative Layout Shift (CLS), lowering your Lighthouse score. 
-   Using transform: scale or translateX avoids triggering layout recalculations.
-*/
 .section-2 a:hover, 
 .section-2 a:focus {
     color: #fff;
@@ -108,7 +101,6 @@ a {
 /* photography gallery layout */
 .gallery-grid {
     display: grid;
-    /* auto-fit lets rows fill out nicely; minmax keeps grid sizing consistent */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
     margin-top: 15px;
@@ -119,7 +111,6 @@ a {
     overflow: hidden;
     border-radius: 4px;
     background-color: #1a1d20;
-    /* forces every container to be a perfect square */
     aspect-ratio: 1 / 1; 
     width: 100%;
 }
@@ -127,7 +118,6 @@ a {
 .gallery-item img {
     width: 100%;
     height: 100%;
-    /* cuts off image edges uniformly to match the square perfectly without stretching */
     object-fit: cover; 
     transition: transform 0.3s ease, filter 0.3s ease;
     filter: grayscale(20%);
@@ -137,6 +127,60 @@ a {
     transform: scale(1.05);
     filter: grayscale(0%);
     cursor: pointer;
+}
+
+/* Lightbox Modal System */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(16, 18, 20, 0.95);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: #7A7C80;
+    font-size: 40px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #fff;
+    transform: scale(1.1);
 }
 
 /* media queries */
@@ -152,14 +196,17 @@ a {
         padding: 0;
         padding-left: 1.5rem;
         padding-top: 2rem;
-        width: 90%; /* widened from 70% to give your text and gallery breathing room on mobile */
+        width: 90%;
     }
 }
 
 @media(max-width: 480px) {
     .gallery-grid {
-        /* drops to a neat side-by-side 2-column grid on phones */
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+    }
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 75vh;
     }
 }
