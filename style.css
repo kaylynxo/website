@@ -83,6 +83,23 @@ a {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
+/* inline header (links section) */
+.inline-header {
+    display: flex;
+    align-items: baseline; /* aligns the text bottoms perfectly */
+    gap: 15px;             /* space between heading and link */
+    margin-bottom: 25px;   /* matches the vertical rhythm of other sections */
+}
+
+.inline-header h2 {
+    margin: 0;             /* prevents vertical offset */
+}
+
+.inline-header a {
+    width: auto;           /* overrides the 100px width limit so text doesn't warp */
+    margin-bottom: 0;      /* prevents pushing the alignment out of line */
+}
+
 /* animations / utilities */
 .section-2 a:hover, 
 .section-2 a:focus {
