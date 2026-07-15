@@ -86,18 +86,18 @@ a {
 /* inline header (links section) */
 .inline-header {
     display: flex;
-    align-items: baseline; /* aligns the text bottoms perfectly */
-    gap: 15px;             /* space between heading and link */
-    margin-bottom: 25px;   /* matches the vertical rhythm of other sections */
+    align-items: baseline; 
+    gap: 15px;             
+    margin-bottom: 25px;   
 }
 
 .inline-header h2 {
-    margin: 0;             /* prevents vertical offset */
+    margin: 0;             
 }
 
 .inline-header a {
-    width: auto;           /* overrides the 100px width limit so text doesn't warp */
-    margin-bottom: 0;      /* prevents pushing the alignment out of line */
+    width: auto;           
+    margin-bottom: 0;      
 }
 
 /* animations / utilities */
